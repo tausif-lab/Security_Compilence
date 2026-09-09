@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Security Compliance</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <!-- Left Side: Product Info -->
+            <div class="hero-content">
+                <h1>Network Security<br>Compliance Automation</h1>
+                <p class="subtitle">Analyze network device configurations against CIS and NIST security standards. Automated compliance checking for Cisco and Juniper devices.</p>
+            </div>
+
+            <!-- Right Side: Upload Form -->
+            <div class="hero-form">
+                <div class="form-card">
+                    <h2>Upload Configuration</h2>
+                    
+                    <form id="uploadForm">
+                        <div class="form-group">
+                            <label for="vendor">Device Vendor</label>
+                            <select id="vendor" name="vendor" required>
+                                <option value="">Select vendor...</option>
+                                <option value="cisco">Cisco</option>
+                                <option value="juniper">Juniper</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="configFile">Configuration File</label>
+                            <div class="file-input-wrapper">
+                                <input type="file" id="configFile" name="config" accept=".txt,.conf,.cfg" required>
+                                <label for="configFile" class="file-input-label">
+                                    <span class="file-input-text">Choose file...</span>
+                                    <span class="file-input-button">Browse</span>
+                                </label>
+                            </div>
+                            <span class="file-name" id="fileName"></span>
+                        </div>
+
+                        <button type="submit" class="btn-primary" id="submitBtn">
+                            <span class="btn-text">Analyze Configuration</span>
+                            <span class="btn-loader" style="display: none;">Analyzing...</span>
+                        </button>
+                    </form>
+
+                    <div id="statusMessage" class="status-message"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section (Hidden Initially) -->
+        <div id="resultsSection" class="results-section" style="display: none;">
+            <div class="results-header">
+                <h2>Compliance Report</h2>
+                <button id="downloadPdfBtn" class="btn-secondary">Download PDF</button>
+            </div>
+
+            <div class="report-card">
+                <div class="report-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Upload ID</span>
+                        <span class="meta-value" id="uploadId"></span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Vendor</span>
+                        <span class="meta-value" id="vendorInfo"></span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Status</span>
+                        <span class="meta-value status-badge" id="statusInfo"></span>
+                    </div>
+                </div>
+
+                <div class="summary-grid" id="summaryGrid">
+                    <!-- Summary cards will be inserted here -->
+                </div>
+
+                <div class="baseline-section">
+                    <h3>Baseline Configuration</h3>
+                    <div id="baselineData" class="baseline-data"></div>
+                </div>
+
+                <div class="rules-section">
+                    <h3>Compliance Rules</h3>
+                    <div id="rulesData" class="rules-data"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

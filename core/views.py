@@ -7,10 +7,17 @@ Synchronous for the prototype (no Celery).
 
 import json
 from pathlib import Path
+from io import BytesIO
 
+from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+
+from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak
 
 from .models import DeviceUpload, RemediationLog
 from .serializers import DeviceUploadSerializer
@@ -69,7 +76,6 @@ def _process_single_config(config_text, vendor, instructions, schema, rules):
 
 def generate_compliance_pdf(uploads):
     """Builds a single PDF covering one or more uploads (multi-device report)."""
-    from io import BytesIO
     buffer = BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=letter)
     styles = getSampleStyleSheet()
